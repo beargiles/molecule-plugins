@@ -11,7 +11,7 @@
     subnet_name: molecule_subnet
   tasks:
     - name: Destroy resource group and all associated resources
-      azure_rm_resourcegroup:
+      azure.azcollection.azure_rm_resourcegroup:
         name: "{{ resource_group_name }}"
         state: absent
         force_delete_nonempty: true
@@ -20,11 +20,11 @@
     # Mandatory configuration for Molecule to function.
 
     - name: Populate instance config
-      set_fact:
+      ansible.builtin.set_fact:
         instance_conf: {}
 
     - name: Dump instance config
-      copy:
+      ansible.builtin.copy:
         content: "{{ instance_conf | to_json | from_json | molecule_to_yaml | molecule_header }}"
         dest: "{{ molecule_instance_config }}"
       when: rg.changed | bool

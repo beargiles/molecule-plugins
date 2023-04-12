@@ -35,7 +35,7 @@ LOG = logger.get_logger(__name__)
 @pytest.mark.xfail(reason="need to fix template path")
 def test_command_init_scenario(temp_dir):
     role_directory = os.path.join(temp_dir.strpath, "test-init")
-    cmd = ["molecule", "init", "role", "test-init"]
+    cmd = ["molecule", "init", "role", "foo.test-init"]
     assert run_command(cmd).returncode == 0
     metadata_lint_update(role_directory)
 
